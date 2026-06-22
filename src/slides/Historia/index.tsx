@@ -23,26 +23,26 @@ export default function Historia() {
       <Tag>Fundamentos · Rodrigo</Tag>
       <Title>Historia de la Criptografía</Title>
 
-      <motion.div variants={stagger} className="flex-1 flex gap-6 overflow-hidden">
+      <motion.div variants={stagger} className="flex-1 flex gap-8 overflow-hidden mt-2">
         {/* Timeline */}
-        <div className="flex-1 relative overflow-y-auto pr-2">
-          <div className="absolute left-[52px] top-1 bottom-1 w-px"
-            style={{ background: 'linear-gradient(180deg,transparent,rgba(255,255,255,0.1) 10%,rgba(255,255,255,0.1) 90%,transparent)' }} />
-          <div className="flex flex-col gap-3">
+        <div className="flex-1 relative overflow-y-auto pr-4 custom-scrollbar">
+          <div className="absolute left-6.5 top-4 bottom-4 w-px"
+            style={{ background: 'linear-gradient(180deg,transparent,rgba(255,255,255,0.15) 10%,rgba(255,255,255,0.15) 90%,transparent)' }} />
+          <div className="flex flex-col gap-6">
             {EVENTS.map(({ year, name, desc, color, Icon }, i) => (
-              <motion.div key={i} variants={fadeUp} className="flex items-start gap-4">
-                <div className="flex flex-col items-center shrink-0 w-12">
-                  <div className="w-9 h-9 rounded-xl flex items-center justify-center relative z-10"
-                    style={{ background: `${color}15`, border: `1px solid ${color}35` }}>
-                    <Icon size={18} weight="duotone" color={color} />
+              <motion.div key={i} variants={fadeUp} className="flex items-start gap-5 group cursor-default">
+                <div className="flex flex-col items-center shrink-0 w-13">
+                  <div className="w-12 h-12 rounded-2xl flex items-center justify-center relative z-10 transition-all duration-300 group-hover:scale-110 group-hover:shadow-[0_0_20px_rgba(255,255,255,0.1)]"
+                    style={{ background: `${color}15`, border: `1px solid ${color}40`, boxShadow: `0 0 15px ${color}10` }}>
+                    <Icon size={24} weight="duotone" color={color} />
                   </div>
                 </div>
-                <div className="flex-1 pb-1">
-                  <div className="flex items-center gap-2 mb-0.5">
-                    <span className="font-mono text-[10px] font-bold" style={{ color }}>{year}</span>
-                    <span className="text-sm font-bold text-white/90">{name}</span>
+                <div className="flex-1 pt-1">
+                  <div className="flex items-center gap-3 mb-1.5">
+                    <span className="font-mono text-xs font-bold px-2 py-0.5 rounded-md bg-white/5 border border-white/10" style={{ color }}>{year}</span>
+                    <span className="text-lg font-bold text-white/95 group-hover:text-white transition-colors">{name}</span>
                   </div>
-                  <p className="text-white/70 text-xs leading-relaxed">{desc}</p>
+                  <p className="text-white/70 text-sm leading-relaxed pr-6 group-hover:text-white/85 transition-colors">{desc}</p>
                 </div>
               </motion.div>
             ))}
@@ -50,38 +50,65 @@ export default function Historia() {
         </div>
 
         {/* Right panel */}
-        <motion.div variants={fadeUp} className="w-[36%] flex flex-col gap-3">
-          <div className="flex-1 rounded-2xl p-5 flex flex-col gap-4"
-            style={{ background: 'rgba(167,139,250,0.05)', border: '1px solid rgba(167,139,250,0.2)' }}>
-            <p className="font-mono text-[10px] text-violet-400/60 uppercase tracking-widest">Caso emblemático</p>
-            <Cpu size={36} weight="duotone" color="#a78bfa" />
-            <h3 className="text-violet-300 font-bold text-lg leading-tight">
-              Máquina Enigma<br />
-              <span className="text-white/80 text-base font-normal">y Alan Turing</span>
-            </h3>
-            <p className="text-white/80 text-sm leading-relaxed">
-              Enigma generaba <strong className="text-white/80">158 quintillones</strong> de configuraciones posibles.
-              Los nazis cambiaban la configuración cada 24 horas.
-            </p>
-            <p className="text-white/80 text-sm leading-relaxed">
-              Turing construyó la <strong className="text-violet-300">Bombe</strong> — una máquina electromecánica
-              que encontraba la configuración diaria en horas. Salvó millones de vidas.
-            </p>
-            <div className="rounded-xl px-4 py-3"
-              style={{ background: 'rgba(167,139,250,0.08)', border: '1px solid rgba(167,139,250,0.2)' }}>
-              <p className="text-violet-300 text-xs font-bold mb-1">Lección</p>
-              <p className="text-white/75 text-xs leading-relaxed">
-                Complejidad no es seguridad. La criptografía moderna se basa en problemas matemáticos probadamente difíciles.
-              </p>
+        <motion.div variants={fadeUp} className="w-[42%] flex flex-col gap-5">
+          <div className="flex-1 rounded-3xl overflow-hidden flex flex-col relative group shadow-2xl"
+            style={{ background: 'rgba(167,139,250,0.04)', border: '1px solid rgba(167,139,250,0.2)' }}>
+            
+            {/* Image Section */}
+            <div className="h-[45%] w-full relative overflow-hidden">
+              <img 
+                src="/enigma-machine.png" 
+                alt="Máquina Enigma" 
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-linear-to-t from-[#0a0a0f] via-[#0a0a0f]/40 to-transparent" />
+              <div className="absolute top-4 left-4">
+                <p className="font-mono text-[10px] text-violet-200 bg-violet-900/60 px-2 py-1 rounded backdrop-blur-md uppercase tracking-widest border border-violet-500/30">
+                  Caso emblemático
+                </p>
+              </div>
+            </div>
+
+            {/* Content Section */}
+            <div className="px-6 pb-6 pt-1 flex flex-col gap-4 flex-1">
+              <div>
+                <h3 className="text-violet-300 font-bold text-2xl leading-tight">
+                  Máquina Enigma
+                </h3>
+                <p className="text-white/60 text-sm mt-1">Rota por Alan Turing en Bletchley Park</p>
+              </div>
+              
+              <div className="text-white/80 text-sm leading-relaxed space-y-3 flex-1">
+                <p>
+                  Enigma generaba <strong className="text-violet-300">158 quintillones</strong> de configuraciones posibles que los nazis cambiaban cada 24 horas.
+                </p>
+                <p>
+                  Turing construyó la <strong className="text-violet-200">Bombe</strong>, un dispositivo electromecánico que descifraba los mensajes en horas, salvando millones de vidas.
+                </p>
+              </div>
+
+              <div className="rounded-xl px-4 py-3 mt-auto relative overflow-hidden"
+                style={{ background: 'rgba(167,139,250,0.08)', border: '1px solid rgba(167,139,250,0.2)' }}>
+                <div className="absolute left-0 top-0 bottom-0 w-1 bg-violet-500/50" />
+                <p className="text-violet-300 text-xs font-bold mb-1 ml-2">Lección</p>
+                <p className="text-white/75 text-xs leading-relaxed ml-2">
+                  Complejidad no es seguridad. La criptografía moderna se basa en problemas matemáticos rigurosos probadamente difíciles.
+                </p>
+              </div>
             </div>
           </div>
 
-          <div className="rounded-2xl px-4 py-3"
-            style={{ background: 'rgba(52,211,153,0.06)', border: '1px solid rgba(52,211,153,0.2)' }}>
-            <p className="text-emerald-400 text-xs font-bold mb-1">Principio de Kerckhoffs (1883)</p>
-            <p className="text-white/75 text-xs leading-relaxed italic">
-              "Un sistema criptográfico debe ser seguro incluso si todo sobre él, excepto la clave, es de conocimiento público."
-            </p>
+          <div className="rounded-2xl px-5 py-4 flex items-start gap-4 transition-colors hover:bg-emerald-500/5"
+            style={{ background: 'rgba(52,211,153,0.04)', border: '1px solid rgba(52,211,153,0.2)' }}>
+            <div className="p-2.5 rounded-xl bg-emerald-500/10 shrink-0">
+              <ShieldCheck size={24} weight="duotone" className="text-emerald-400" />
+            </div>
+            <div>
+              <p className="text-emerald-400 text-sm font-bold mb-1">Principio de Kerckhoffs</p>
+              <p className="text-white/70 text-[13px] leading-relaxed italic">
+                "Un sistema criptográfico debe ser seguro incluso si todo sobre él, excepto la clave secreta, es público."
+              </p>
+            </div>
           </div>
         </motion.div>
       </motion.div>

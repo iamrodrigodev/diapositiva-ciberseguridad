@@ -3,121 +3,161 @@ import { stagger, fadeUp } from '../../lib/motion'
 import SlideLayout from '../../components/SlideLayout'
 import Tag from '../../ui/Tag'
 import Title from '../../ui/Title'
-import { Skull, Bandaids, DesktopTower, ChartBar } from '@phosphor-icons/react'
+import { 
+  Skull, Bandaids, DesktopTower, ChartBar, 
+  CalendarBlank, Key, Clock, ShieldWarning, WarningCircle, ShieldCheck
+} from '@phosphor-icons/react'
 
 const BITS = [
-  { algo: 'DES',     bits: 56,  combos: '2⁵⁶ ≈ 72 cuatrillones', time: '22 horas (1999) · segundos hoy', color: '#f87171', status: 'ROTO',     bar: 0.14 },
-  { algo: '3DES',    bits: 112, combos: '2¹¹² combinaciones',      time: 'Días (obsoleto desde 2019)',     color: '#fbbf24', status: 'OBSOLETO',  bar: 0.28 },
-  { algo: 'AES-128', bits: 128, combos: '2¹²⁸ combinaciones',      time: 'Billones de años',               color: '#60a5fa', status: 'SEGURO',    bar: 0.55 },
-  { algo: 'AES-256', bits: 256, combos: '2²⁵⁶ combinaciones',      time: '> edad del universo',            color: '#34d399', status: 'ÓPTIMO',    bar: 1.00 },
+  { algo: 'DES',     bits: 56,  power: '56', time: 'Segundos hoy', color: '#f87171', status: 'ROTO',     bar: 0.15 },
+  { algo: '3DES',    bits: 112, power: '112', time: 'Días / Semanas', color: '#fbbf24', status: 'OBSOLETO',  bar: 0.35 },
+  { algo: 'AES-128', bits: 128, power: '128', time: 'Billones de años', color: '#60a5fa', status: 'SEGURO',    bar: 0.70 },
+  { algo: 'AES-256', bits: 256, power: '256', time: '> Edad del universo', color: '#34d399', status: 'ÓPTIMO',    bar: 1.00 },
 ]
 
 export default function DES_Detalle() {
   return (
     <SlideLayout>
       <Tag>Simétrica · Rodrigo</Tag>
-      <Title>DES y 3DES — Por qué Fallaron</Title>
+      <Title>DES y 3DES Por qué fallaron</Title>
 
-      <motion.div variants={stagger} className="flex-1 flex gap-5 overflow-hidden">
-        <div className="flex-1 flex flex-col gap-3">
-          {/* DES */}
-          <motion.div variants={fadeUp} className="rounded-2xl p-4"
-            style={{ background: 'rgba(248,113,113,0.05)', border: '1px solid rgba(248,113,113,0.2)' }}>
-            <div className="flex items-center gap-3 mb-2">
-              <div className="w-9 h-9 rounded-xl flex items-center justify-center shrink-0"
-                style={{ background: 'rgba(248,113,113,0.12)', border: '1px solid rgba(248,113,113,0.3)' }}>
-                <Skull size={20} weight="duotone" color="#f87171" />
+      <motion.div variants={stagger} className="flex-1 flex gap-5 overflow-hidden mt-2">
+        <div className="flex-1 flex flex-col gap-4">
+          
+          {/* DES CARD */}
+          <motion.div variants={fadeUp} className="rounded-3xl p-5 shadow-2xl relative overflow-hidden flex flex-col gap-3"
+            style={{ background: 'rgba(248,113,113,0.05)', border: '1px solid rgba(248,113,113,0.15)' }}>
+            <div className="absolute top-0 right-0 w-32 h-32 bg-red-500/10 rounded-full blur-[50px] pointer-events-none" />
+            
+            <div className="flex items-center gap-3 relative z-10">
+              <div className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0 bg-red-500/10 border border-red-500/30 shadow-[0_0_15px_rgba(248,113,113,0.2)]">
+                <Skull size={24} weight="duotone" color="#f87171" />
               </div>
               <div>
-                <h3 className="text-red-400 font-bold text-sm">DES (1977)</h3>
-                <p className="text-white/60 text-xs font-mono">Data Encryption Standard — IBM + NSA</p>
+                <h3 className="text-red-400 font-bold text-[16px] tracking-wide">DES <span className="text-red-400/50 text-[12px] font-mono ml-2">Data Encryption Standard</span></h3>
+                <p className="text-white/50 text-[11px] font-mono">El primer estándar federal (1977)</p>
               </div>
             </div>
-            <div className="flex flex-col gap-1.5 text-xs text-white/80 leading-relaxed">
-              <p>Diseñado por IBM en 1974, adoptado por NIST en <strong className="text-white/85">1977</strong> como el primer estándar federal de cifrado.</p>
-              <p>Usa una clave de solo <strong className="text-red-400">56 bits</strong> — decisión influenciada por la NSA, que quería poder romperlo.</p>
-              <p>En <strong className="text-white/85">1998</strong>: la EFF construyó <em>"Deep Crack"</em> por $250,000 USD y rompió DES en <strong className="text-red-400">22 horas</strong>.</p>
-              <p>Hoy, una <strong className="text-white/85">GPU moderna</strong> lo rompe en <strong className="text-red-400">segundos</strong> por fuerza bruta.</p>
+
+            <div className="grid grid-cols-2 gap-2 mt-2 relative z-10">
+              <div className="flex items-start gap-2 bg-black/30 rounded-lg p-2.5 border border-white/5">
+                <CalendarBlank size={16} color="#94a3b8" className="mt-0.5 shrink-0" />
+                <p className="text-[11px] text-white/70 leading-snug">Creado por <strong>IBM</strong> y adoptado por la NSA. Se convirtió en el estándar mundial.</p>
+              </div>
+              <div className="flex items-start gap-2 bg-red-500/10 rounded-lg p-2.5 border border-red-500/20">
+                <Key size={16} color="#f87171" className="mt-0.5 shrink-0" />
+                <p className="text-[11px] text-red-200 leading-snug">Clave muy corta: solo <strong>56 bits</strong>. Decisión influenciada por la NSA para poder romperlo.</p>
+              </div>
             </div>
           </motion.div>
 
-          {/* 3DES */}
-          <motion.div variants={fadeUp} className="rounded-2xl p-4"
-            style={{ background: 'rgba(251,191,36,0.05)', border: '1px solid rgba(251,191,36,0.2)' }}>
-            <div className="flex items-center gap-3 mb-2">
-              <div className="w-9 h-9 rounded-xl flex items-center justify-center shrink-0"
-                style={{ background: 'rgba(251,191,36,0.12)', border: '1px solid rgba(251,191,36,0.3)' }}>
-                <Bandaids size={20} weight="duotone" color="#fbbf24" />
+          {/* 3DES CARD */}
+          <motion.div variants={fadeUp} className="rounded-3xl p-5 shadow-2xl relative overflow-hidden flex flex-col gap-3"
+            style={{ background: 'rgba(251,191,36,0.05)', border: '1px solid rgba(251,191,36,0.15)' }}>
+            
+            <div className="flex items-center gap-3 relative z-10">
+              <div className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0 bg-amber-500/10 border border-amber-500/30 shadow-[0_0_15px_rgba(251,191,36,0.2)]">
+                <Bandaids size={24} weight="duotone" color="#fbbf24" />
               </div>
               <div>
-                <h3 className="text-amber-400 font-bold text-sm">3DES (Triple DES)</h3>
-                <p className="text-white/60 text-xs font-mono">Parche temporal — EDE mode</p>
+                <h3 className="text-amber-400 font-bold text-[16px] tracking-wide">3DES <span className="text-amber-400/50 text-[12px] font-mono ml-2">Triple DES</span></h3>
+                <p className="text-white/50 text-[11px] font-mono">El parche temporal</p>
               </div>
             </div>
-            <div className="flex flex-col gap-1.5 text-xs text-white/80 leading-relaxed">
-              <p>Aplicar DES <strong className="text-amber-300">tres veces</strong> (Cifrar → Descifrar → Cifrar con 3 claves distintas).</p>
-              <p>Seguridad efectiva: <strong className="text-white/85">112 bits</strong> — el ataque <em>meet-in-the-middle</em> elimina un factor de 2⁵⁶.</p>
-              <p><strong className="text-amber-400">Sweet32</strong> (2016): con ~256 GB de tráfico cifrado se puede recuperar texto en sesiones largas.</p>
-              <p>NIST lo <strong className="text-red-400">deprecó en 2019</strong>. Algunos sistemas bancarios aún lo usan por legado.</p>
+
+            <div className="flex flex-col gap-2 mt-2 relative z-10">
+              <div className="flex items-center gap-2 bg-black/30 rounded-lg p-2.5 border border-white/5">
+                <ShieldWarning size={16} color="#fbbf24" className="shrink-0" />
+                <p className="text-[11px] text-white/70 leading-snug">
+                  Ante la debilidad de DES, decidieron aplicarlo <strong>tres veces seguidas</strong> con claves distintas.
+                </p>
+              </div>
+              <div className="flex items-center gap-2 bg-amber-500/10 rounded-lg p-2.5 border border-amber-500/20">
+                <WarningCircle size={16} color="#fbbf24" className="shrink-0" />
+                <p className="text-[11px] text-amber-200 leading-snug">
+                  Ataques como <strong className="text-amber-400">Sweet32 (2016)</strong> demostraron que tampoco era seguro para volúmenes altos. NIST lo deprecó en 2019.
+                </p>
+              </div>
             </div>
           </motion.div>
 
-          <motion.div variants={fadeUp} className="rounded-xl px-4 py-3"
-            style={{ background: 'rgba(52,211,153,0.06)', border: '1px solid rgba(52,211,153,0.2)' }}>
-            <p className="text-emerald-400 text-xs font-bold mb-1">¿Qué aprendimos?</p>
-            <p className="text-white/75 text-xs leading-relaxed">
-              El poder de cómputo crece exponencialmente (Ley de Moore). Un algoritmo "seguro hoy" puede ser roto mañana si el tamaño de clave no fue pensado con margen suficiente.
-              <strong className="text-white/75"> AES con 128+ bits tiene décadas de margen.</strong>
+          {/* Banner */}
+          <motion.div variants={fadeUp} className="rounded-2xl px-5 py-3 shadow-2xl flex items-center gap-3"
+            style={{ background: 'linear-gradient(90deg, rgba(52,211,153,0.1), rgba(52,211,153,0.02))', border: '1px solid rgba(52,211,153,0.2)' }}>
+            <ShieldCheck size={28} weight="duotone" color="#34d399" className="shrink-0" />
+            <p className="text-white/80 text-[12px] leading-snug">
+              <strong>Lección:</strong> El poder de cómputo crece rápido (Ley de Moore). 
+              <strong className="text-emerald-400"> AES de 128+ bits</strong> fue creado para tener un margen de décadas.
             </p>
           </motion.div>
+
         </div>
 
-        {/* Right: Key size comparison */}
-        <motion.div variants={fadeUp} className="w-[38%] flex flex-col gap-3">
-          <div className="rounded-2xl p-4 flex flex-col gap-3 flex-1 overflow-hidden"
-            style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.08)' }}>
-            <div className="flex items-center gap-2">
-              <ChartBar size={16} weight="duotone" color="rgba(255,255,255,0.4)" />
-              <p className="font-mono text-[10px] text-white/50 uppercase tracking-widest">Espacio de claves</p>
+        {/* Right Column: Key size & Deep Crack */}
+        <motion.div variants={fadeUp} className="w-[45%] flex flex-col gap-4">
+          
+          {/* Chart */}
+          <div className="rounded-3xl p-5 flex flex-col gap-4 flex-1 shadow-2xl relative overflow-hidden"
+            style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.08)' }}>
+            <div className="flex items-center gap-2 mb-1">
+              <ChartBar size={20} weight="duotone" color="rgba(255,255,255,0.6)" />
+              <p className="font-mono text-[12px] text-white/50 uppercase tracking-widest font-bold">Fuerza Bruta</p>
             </div>
 
-            {BITS.map(({ algo, bits, combos, time, color, status, bar }) => (
-              <div key={algo} className="flex flex-col gap-1">
-                <div className="flex items-center justify-between">
-                  <span className="font-mono text-xs font-bold" style={{ color }}>{algo}</span>
-                  <span className="font-mono text-[9px] font-bold px-2 py-0.5 rounded"
-                    style={{ background: `${color}18`, color, border: `1px solid ${color}30` }}>
-                    {status}
-                  </span>
+            <div className="flex flex-col justify-center gap-4 flex-1">
+              {BITS.map(({ algo, bits, power, time, color, status, bar }) => (
+                <div key={algo} className="flex flex-col gap-1.5 group">
+                  <div className="flex items-end justify-between">
+                    <span className="font-mono text-[13px] font-bold" style={{ color }}>{algo}</span>
+                    <span className="font-mono text-[10px] text-white/40 flex items-center gap-0.5">
+                      {bits} bits · <span>2<sup className="text-[7.5px] ml-[0.5px]">{power}</sup></span> combos
+                    </span>
+                  </div>
+                  <div className="h-4 rounded-full bg-black/50 border border-white/5 overflow-hidden relative">
+                    <motion.div initial={{ width: 0 }} animate={{ width: `${bar * 100}%` }}
+                      transition={{ duration: 1, delay: 0.2, type: 'spring' }}
+                      className="absolute top-0 left-0 bottom-0 rounded-full"
+                      style={{ background: `linear-gradient(90deg, ${color}40, ${color})`, boxShadow: `0 0 10px ${color}80` }} 
+                    />
+                  </div>
+                  <div className="flex justify-between items-center mt-0.5">
+                    <span className="font-mono text-[9px] px-2 py-0.5 rounded font-bold"
+                      style={{ background: `${color}15`, color, border: `1px solid ${color}30` }}>
+                      {status}
+                    </span>
+                    <div className="flex items-center gap-1">
+                      <Clock size={12} color={color} />
+                      <span className="text-[10px] font-mono text-white/60">{time}</span>
+                    </div>
+                  </div>
                 </div>
-                <div className="h-4 rounded-lg bg-white/[0.04] border border-white/8 overflow-hidden">
-                  <motion.div initial={{ width: 0 }} animate={{ width: `${bar * 100}%` }}
-                    transition={{ duration: 0.7, delay: 0.1 }}
-                    className="h-full rounded-lg"
-                    style={{ background: `linear-gradient(90deg,${color}80,${color})` }} />
-                </div>
-                <span className="font-mono text-[10px] text-white/60">{bits} bits — {combos}</span>
-                <div className="font-mono text-[10px] rounded px-2 py-0.5"
-                  style={{ background: `${color}0a`, color: `${color}cc`, border: `1px solid ${color}18` }}>
-                  ⏱ {time}
-                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Deep Crack Box */}
+          <div className="rounded-3xl p-5 shrink-0 shadow-2xl relative overflow-hidden"
+            style={{ background: 'rgba(248,113,113,0.08)', border: '1px solid rgba(248,113,113,0.3)' }}>
+            <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10 pointer-events-none" />
+            
+            <div className="flex items-center gap-3 mb-3 relative z-10">
+              <div className="w-10 h-10 rounded-xl bg-red-500/20 flex items-center justify-center border border-red-500/40 shadow-[0_0_15px_rgba(248,113,113,0.3)]">
+                <DesktopTower size={24} weight="duotone" color="#f87171" className="animate-pulse" />
               </div>
-            ))}
+              <div>
+                <h3 className="text-red-400 font-bold text-[15px] uppercase tracking-wider">Deep Crack (1998)</h3>
+                <p className="text-white/50 text-[10px] font-mono">Electronic Frontier Foundation</p>
+              </div>
+            </div>
+            
+            <div className="bg-black/40 rounded-xl p-3 border border-red-500/20 relative z-10">
+              <p className="text-white/80 text-[12px] leading-relaxed">
+                Máquina de <strong className="text-red-300">$250,000</strong> con <strong>1,856 chips</strong> dedicados.
+                Rompió DES en <strong>22 horas</strong> probando <span className="text-red-400 font-bold font-mono">90 billones</span> de claves/segundo.
+              </p>
+            </div>
           </div>
 
-          <div className="rounded-2xl p-4 shrink-0"
-            style={{ background: 'rgba(248,113,113,0.05)', border: '1px solid rgba(248,113,113,0.18)' }}>
-            <div className="flex items-center gap-2 mb-2">
-              <DesktopTower size={18} weight="duotone" color="#f87171" />
-              <p className="text-red-400 text-xs font-bold">Deep Crack — 1998</p>
-            </div>
-            <p className="text-white/75 text-xs leading-relaxed">
-              La EFF construyó esta máquina por <strong className="text-white/80">$250,000</strong>.
-              Contenía <strong className="text-white/80">1,856 chips</strong> especializados probando
-              <strong className="text-white/80"> 90 billones de claves por segundo</strong>.
-              Hoy una RTX 4090 lo supera.
-            </p>
-          </div>
         </motion.div>
       </motion.div>
     </SlideLayout>
