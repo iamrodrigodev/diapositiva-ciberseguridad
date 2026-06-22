@@ -1,11 +1,10 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { fadeUp } from '../../lib/motion'
 import SlideLayout from '../../components/SlideLayout'
 import Tag from '../../ui/Tag'
 import Title from '../../ui/Title'
 import { 
-  FileVideo, LockKey, Envelope, ShieldCheck, 
+  LockKey, Envelope, ShieldCheck, 
   XCircle, CheckCircle, RocketLaunch, WarningCircle,
   Key
 } from '@phosphor-icons/react'
@@ -136,15 +135,15 @@ export default function JuegoHibrido() {
                 <span className="inline-block px-3 py-1 rounded-full bg-white/10 border border-white/20 text-[11px] font-bold text-white/70 tracking-widest uppercase mb-3">
                   Paso {currentStep + 1} de {STEPS.length}
                 </span>
-                <h2 className="text-[22px] font-bold text-white mb-2">{STEPS[currentStep].title}</h2>
+                <h2 className="text-[22px] font-bold text-white mb-2">{STEPS[currentStep]!.title}</h2>
                 <p className="text-[16px] text-white/70 leading-relaxed max-w-xl mx-auto">
-                  {STEPS[currentStep].scenario}
+                  {STEPS[currentStep]!.scenario}
                 </p>
               </div>
 
               {/* Options */}
               <div className="grid grid-cols-2 gap-4">
-                {STEPS[currentStep].options.map(opt => {
+                {STEPS[currentStep]!.options.map(opt => {
                   const isSelected = selectedOption === opt.id
                   const isWrong = isSelected && status === 'error'
                   const isRight = isSelected && status === 'success'
@@ -209,7 +208,7 @@ export default function JuegoHibrido() {
                         <p className={`text-[15px] leading-relaxed font-medium ${
                           status === 'success' ? 'text-emerald-100' : 'text-red-100'
                         }`}>
-                          {STEPS[currentStep].options.find(o => o.id === selectedOption)?.feedback}
+                          {STEPS[currentStep]!.options.find(o => o.id === selectedOption)?.feedback}
                         </p>
                         
                         {status === 'success' && (

@@ -7,7 +7,9 @@ import Title from '../../ui/Title'
 import { RADAR_DATA, COMPARISONS } from './data'
 import { Key, Lightning, ShareNetwork, HardDrives, LockKey, GitMerge } from '@phosphor-icons/react'
 
-const ICON_MAP: Record<string, any> = {
+import React from 'react'
+
+const ICON_MAP: Record<string, React.ElementType> = {
   'Misma clave': Key,
   'Velocidad': Lightning,
   'Distribución clave': ShareNetwork,
