@@ -26,6 +26,7 @@ const SLIDES = [
   // ── Cierre ──────────────────────────────────────────────────────
   { component: lazy(() => import('./slides/Aplicaciones')),      title: 'Aplicaciones Reales',        presenter: 'Ambos'   },
   { component: lazy(() => import('./slides/09_Comparativa')),    title: 'Comparativa',                presenter: 'Ambos'   },
+  { component: lazy(() => import('./slides/JuegoHibrido')),      title: 'El Desafío Híbrido',         presenter: 'Ambos'   },
   { component: lazy(() => import('./slides/10_Conclusion')),     title: 'Conclusión',                 presenter: 'Ambos'   },
 ]
 
