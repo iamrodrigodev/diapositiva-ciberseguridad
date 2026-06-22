@@ -21,7 +21,7 @@ const CELLS = [
   [ { id: '03', c: '#ef4444' }, { id: '07', c: '#3b82f6' }, { id: '0B', c: '#10b981' }, { id: '0F', c: '#f59e0b' } ],
 ]
 
-function StateGrid({ op, activeColor }: { op: string, activeColor?: string }) {
+function StateGrid({ op, activeColor }: { op: string, activeColor?: string | undefined }) {
   const isShift = op === 'shift'
   
   return (

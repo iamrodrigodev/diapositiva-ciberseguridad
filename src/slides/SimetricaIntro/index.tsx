@@ -3,7 +3,7 @@ import { stagger, fadeUp } from '../../lib/motion'
 import SlideLayout from '../../components/SlideLayout'
 import Tag from '../../ui/Tag'
 import Title from '../../ui/Title'
-import { Key, LockKey, LockOpen, Lightning, Infinity, WarningCircle } from '@phosphor-icons/react'
+import { Key, LockKey, LockOpen, Lightning, Infinity as InfinityIcon, WarningCircle } from '@phosphor-icons/react'
 
 export default function SimetricaIntro() {
   return (
@@ -84,7 +84,7 @@ export default function SimetricaIntro() {
                 </p>
               </li>
               <li className="flex gap-3 items-start">
-                <Infinity size={16} className="text-blue-400 mt-0.5 shrink-0" weight="bold" />
+                <InfinityIcon size={16} className="text-blue-400 mt-0.5 shrink-0" weight="bold" />
                 <p className="text-[13px] text-white/70 leading-relaxed">
                   <strong className="text-blue-300">Seguridad probada:</strong> Algoritmos como AES-256 son tan robustos que tomaría millones de años romperlos por fuerza bruta.
                 </p>
