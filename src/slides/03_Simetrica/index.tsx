@@ -2,7 +2,7 @@ import SlideLayout from '../../components/SlideLayout'
 import Tag from '../../ui/Tag'
 import Title from '../../ui/Title'
 import AlgoCard from './AlgoCard'
-import AESDemo from './AESDemo'
+import EncryptViz from './EncryptViz'
 import { ALGOS } from './data'
 
 export default function Simetrica() {
@@ -15,7 +15,7 @@ export default function Simetrica() {
         <div className="flex flex-col gap-3 w-[55%]">
           {ALGOS.map(a => <AlgoCard key={a.id} algo={a} />)}
         </div>
-        <AESDemo />
+        <EncryptViz />
       </div>
     </SlideLayout>
   )

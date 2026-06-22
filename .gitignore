@@ -22,3 +22,8 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Files
+PRODUCT.md
+.impeccable
+.claude

@@ -12,27 +12,27 @@ export default function DHStepper({ a, b, steps }: Props) {
 
   return (
     <div className="flex flex-col gap-3 overflow-y-auto pr-1">
-      <p className="text-xs font-mono text-white/30 tracking-widest uppercase mb-1">Ejecución paso a paso</p>
+      <p className="text-xs font-mono text-white/50 tracking-widest uppercase mb-1">Ejecución paso a paso</p>
 
       <StepRow show={has('public')} color="#34d399" label="① Parámetros públicos conocidos por todos">
         <div className="flex gap-8 font-mono text-base mt-1">
           <span>p = <strong className="text-emerald-400">{DH_P.toString()}</strong></span>
           <span>g = <strong className="text-emerald-400">{DH_G.toString()}</strong></span>
         </div>
-        <p className="text-white/45 text-sm mt-2">p es primo (23) y g es generador (5). Estos valores son públicos — cualquiera los conoce.</p>
+        <p className="text-white/65 text-sm mt-2">p es primo (23) y g es generador (5). Estos valores son públicos — cualquiera los conoce.</p>
       </StepRow>
 
       <StepRow show={has('A')} color="#60a5fa" label="② Alice calcula su clave pública A">
         <div className="font-mono text-sm space-y-1 mt-1 text-white/65">
           <div>A = g<sup>a</sup> mod p = {DH_G.toString()}<sup>{a}</sup> mod {DH_P.toString()}</div>
-          <div className="text-base"><strong className="text-blue-400">A = {A.toString()}</strong> <span className="text-white/30 text-sm">(Alice envía este valor a Bob)</span></div>
+          <div className="text-base"><strong className="text-blue-400">A = {A.toString()}</strong> <span className="text-white/50 text-sm">(Alice envía este valor a Bob)</span></div>
         </div>
       </StepRow>
 
       <StepRow show={has('B')} color="#a78bfa" label="③ Bob calcula su clave pública B">
         <div className="font-mono text-sm space-y-1 mt-1 text-white/65">
           <div>B = g<sup>b</sup> mod p = {DH_G.toString()}<sup>{b}</sup> mod {DH_P.toString()}</div>
-          <div className="text-base"><strong className="text-violet-400">B = {B.toString()}</strong> <span className="text-white/30 text-sm">(Bob envía este valor a Alice)</span></div>
+          <div className="text-base"><strong className="text-violet-400">B = {B.toString()}</strong> <span className="text-white/50 text-sm">(Bob envía este valor a Alice)</span></div>
         </div>
       </StepRow>
 
