@@ -9,7 +9,7 @@ export function simulateEncrypt(plaintext: string): string {
   try {
     const reversed = plaintext.split('').reverse().join('')
     return btoa(unescape(encodeURIComponent(reversed)))
-  } catch (e) {
+  } catch {
     return 'ERR_ENC'
   }
 }
@@ -20,7 +20,7 @@ export function simulateDecrypt(ciphertext: string): string {
   try {
     const decoded = decodeURIComponent(escape(atob(ciphertext)))
     return decoded.split('').reverse().join('')
-  } catch (e) {
+  } catch {
     return 'ERR_DEC'
   }
 }
