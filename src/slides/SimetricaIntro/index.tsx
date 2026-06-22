@@ -34,7 +34,7 @@ export default function SimetricaIntro() {
             </p>
 
             {/* Visual Analogy */}
-            <div className="bg-black/30 rounded-2xl p-4 border border-white/5 flex flex-col items-center justify-center gap-4 relative z-10">
+            <div className="bg-black/30 rounded-2xl p-4 border border-white/5 flex flex-col items-center justify-center gap-4 relative z-10 mb-4">
               <p className="text-[12px] text-white/40 uppercase tracking-widest font-bold">La Analogía de la Caja Fuerte</p>
               
               <div className="flex w-full items-center justify-between px-4">
@@ -58,6 +58,22 @@ export default function SimetricaIntro() {
                   </div>
                   <span className="text-[11px] font-bold text-white/60">DESCIFRAR</span>
                 </div>
+              </div>
+            </div>
+
+            {/* Fun Facts */}
+            <div className="mt-auto pt-4 border-t border-emerald-500/20 relative z-10">
+              <p className="text-[11px] font-mono text-emerald-400/80 uppercase tracking-widest font-bold mb-3 flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                Datos Históricos Curiosos
+              </p>
+              <div className="flex flex-col gap-2">
+                <p className="text-[12px] text-white/70 leading-relaxed bg-black/20 p-2.5 rounded-lg border border-white/5">
+                  <strong className="text-emerald-300">Julio César</strong> usaba criptografía simétrica hace 2000 años (Cifrado César) desplazando el abecedario.
+                </p>
+                <p className="text-[12px] text-white/70 leading-relaxed bg-black/20 p-2.5 rounded-lg border border-white/5">
+                  <strong className="text-emerald-300">Máquina Enigma:</strong> En la 2da Guerra Mundial, los nazis usaban una máquina de cifrado simétrico electromecánica complejísima.
+                </p>
               </div>
             </div>
           </motion.div>
