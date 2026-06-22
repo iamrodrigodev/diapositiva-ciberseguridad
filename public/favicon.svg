@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <defs>
+    <linearGradient id="shield-grad" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#7c3aed"/>
+      <stop offset="100%" stop-color="#4f46e5"/>
+    </linearGradient>
+    <linearGradient id="lock-grad" x1="0" y1="0" x2="0" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="1"/>
+      <stop offset="100%" stop-color="#c4b5fd" stop-opacity="1"/>
+    </linearGradient>
+  </defs>
+  <!-- Shield -->
+  <path d="M32 4 L56 14 L56 34 C56 47 44 57 32 60 C20 57 8 47 8 34 L8 14 Z"
+        fill="url(#shield-grad)" stroke="#7c3aed" stroke-width="1"/>
+  <!-- Shield gloss -->
+  <path d="M32 8 L52 17 L52 34 C52 44 43 52 32 56"
+        fill="none" stroke="white" stroke-width="0.8" stroke-opacity="0.25"/>
+  <!-- Lock body -->
+  <rect x="22" y="34" width="20" height="14" rx="3" fill="url(#lock-grad)"/>
+  <!-- Lock shackle -->
+  <path d="M26 34 L26 28 C26 23.6 38 23.6 38 28 L38 34"
+        stroke="url(#lock-grad)" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+  <!-- Keyhole -->
+  <circle cx="32" cy="40" r="2.5" fill="#4f46e5"/>
+  <rect x="31" y="40" width="2" height="4" rx="1" fill="#4f46e5"/>
+</svg>
