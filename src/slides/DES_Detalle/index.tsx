@@ -150,11 +150,19 @@ export default function DES_Detalle() {
               </div>
             </div>
             
-            <div className="bg-black/40 rounded-xl p-3 border border-red-500/20 relative z-10">
+            <div className="bg-black/40 rounded-xl p-3 border border-red-500/20 relative z-10 flex flex-col gap-2.5">
               <p className="text-white/80 text-[12px] leading-relaxed">
                 Máquina de <strong className="text-red-300">$250,000</strong> con <strong>1,856 chips</strong> dedicados.
                 Rompió DES en <strong>22 horas</strong> probando <span className="text-red-400 font-bold font-mono">90 billones</span> de claves/segundo.
               </p>
+              
+              <div className="pt-2.5 border-t border-red-500/20">
+                <p className="text-[11px] text-white/70 leading-relaxed">
+                  <strong className="text-red-400">¿Por qué es importante histórico?</strong> 
+                  <br/>
+                  Demostró públicamente que el estándar del gobierno ya era inseguro. Esto forzó un cambio de paradigma total: de algoritmos creados en secreto por agencias de inteligencia, se pasó a un <strong>concurso público, transparente y mundial</strong> para elegir al sucesor (AES), permitiendo que la comunidad global lo auditara.
+                </p>
+              </div>
             </div>
           </div>
 
