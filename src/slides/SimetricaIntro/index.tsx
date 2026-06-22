@@ -66,52 +66,62 @@ export default function SimetricaIntro() {
         {/* Right: Pros and Cons */}
         <div className="w-[50%] flex flex-col gap-4">
           
-          {/* Pros */}
+          {/* Pros & Uses */}
           <motion.div variants={fadeUp} className="rounded-3xl p-6 shadow-2xl relative overflow-hidden"
             style={{ background: 'rgba(96,165,250,0.05)', border: '1px solid rgba(96,165,250,0.15)' }}>
             <div className="flex items-center gap-3 mb-4">
               <div className="w-10 h-10 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center shadow-[0_0_15px_rgba(96,165,250,0.2)]">
                 <Lightning size={24} weight="duotone" color="#60a5fa" />
               </div>
-              <h3 className="text-blue-400 font-bold text-[16px]">Fuerza Bruta y Velocidad</h3>
+              <h3 className="text-blue-400 font-bold text-[18px]">Velocidad y Usos Reales</h3>
             </div>
             
-            <ul className="space-y-3">
-              <li className="flex gap-3 items-start">
-                <Lightning size={16} className="text-blue-400 mt-0.5 shrink-0" weight="fill" />
-                <p className="text-[13px] text-white/70 leading-relaxed">
-                  <strong className="text-blue-300">Extremadamente rápida:</strong> Puede cifrar gigabytes de datos en milisegundos. Ideal para discos duros, bases de datos y streaming de video.
-                </p>
-              </li>
-              <li className="flex gap-3 items-start">
-                <InfinityIcon size={16} className="text-blue-400 mt-0.5 shrink-0" weight="bold" />
-                <p className="text-[13px] text-white/70 leading-relaxed">
-                  <strong className="text-blue-300">Seguridad probada:</strong> Algoritmos como AES-256 son tan robustos que tomaría millones de años romperlos por fuerza bruta.
-                </p>
-              </li>
-            </ul>
+            <p className="text-[14px] text-white/80 leading-relaxed mb-5">
+              Es <strong className="text-blue-300">extremadamente rápida</strong> y segura. Es el estándar mundial para cifrar datos en reposo y grandes volúmenes de tráfico.
+            </p>
+
+            <div className="grid grid-cols-2 gap-3">
+              <div className="bg-white/5 border border-white/10 rounded-xl p-3 flex items-center gap-3">
+                <div className="w-8 h-8 rounded-full bg-blue-500/20 flex items-center justify-center">💻</div>
+                <span className="text-[12px] font-bold text-white/70">Discos Duros (BitLocker)</span>
+              </div>
+              <div className="bg-white/5 border border-white/10 rounded-xl p-3 flex items-center gap-3">
+                <div className="w-8 h-8 rounded-full bg-blue-500/20 flex items-center justify-center">🗄️</div>
+                <span className="text-[12px] font-bold text-white/70">Bases de Datos</span>
+              </div>
+              <div className="bg-white/5 border border-white/10 rounded-xl p-3 flex items-center gap-3">
+                <div className="w-8 h-8 rounded-full bg-blue-500/20 flex items-center justify-center">📺</div>
+                <span className="text-[12px] font-bold text-white/70">Streaming (Netflix)</span>
+              </div>
+              <div className="bg-white/5 border border-white/10 rounded-xl p-3 flex items-center gap-3">
+                <div className="w-8 h-8 rounded-full bg-blue-500/20 flex items-center justify-center">🌐</div>
+                <span className="text-[12px] font-bold text-white/70">Carga de HTTPS</span>
+              </div>
+            </div>
           </motion.div>
 
           {/* Cons */}
-          <motion.div variants={fadeUp} className="flex-1 rounded-3xl p-6 shadow-2xl flex flex-col"
+          <motion.div variants={fadeUp} className="flex-1 rounded-3xl p-6 shadow-2xl flex flex-col justify-center items-center text-center relative overflow-hidden group"
             style={{ background: 'rgba(248,113,113,0.05)', border: '1px solid rgba(248,113,113,0.15)' }}>
-            <div className="flex items-center gap-3 mb-4">
-              <div className="w-10 h-10 rounded-xl bg-red-500/10 border border-red-500/20 flex items-center justify-center shadow-[0_0_15px_rgba(248,113,113,0.2)]">
-                <WarningCircle size={24} weight="duotone" color="#f87171" />
-              </div>
-              <div>
-                <h3 className="text-red-400 font-bold text-[16px]">El Gran Problema</h3>
-              </div>
+            
+            {/* Pulsing red glow */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-red-500/5 blur-[50px] rounded-full pointer-events-none group-hover:bg-red-500/10 transition-colors duration-700" />
+
+            <div className="w-12 h-12 mb-4 rounded-full bg-red-500/10 border border-red-500/20 flex items-center justify-center shadow-[0_0_20px_rgba(248,113,113,0.3)] relative z-10">
+              <WarningCircle size={28} weight="duotone" color="#f87171" />
             </div>
             
-            <p className="text-[13px] text-white/70 leading-relaxed mb-4">
-              Si Alice y Bob quieren hablar de forma segura, ambos deben tener la llave. 
-              Pero si nunca se han visto en persona... <strong className="text-red-400">¿Cómo se envían la llave a través de un internet público sin que un hacker la copie?</strong>
+            <h3 className="text-red-400 font-bold text-[20px] mb-3 relative z-10">El Gran Problema</h3>
+            
+            <p className="text-[15px] text-white/80 leading-relaxed max-w-sm mb-6 relative z-10">
+              Si nunca se han visto en persona... <br/><br/>
+              <strong className="text-red-300 text-[16px]">¿Cómo se envían la llave a través de Internet sin que un hacker la copie?</strong>
             </p>
 
-            <div className="mt-auto bg-red-500/10 border border-red-500/20 rounded-xl p-3 text-center">
-              <span className="text-[11px] font-mono text-red-300 font-bold uppercase tracking-widest">
-                Problema de Distribución de Claves
+            <div className="bg-red-500/10 border border-red-500/30 rounded-xl px-4 py-2 relative z-10">
+              <span className="text-[11px] font-mono text-red-200 font-bold uppercase tracking-widest flex items-center gap-2">
+                <LockOpen size={14} weight="bold" />
+                Spoiler: Se resuelve en la parte 2
               </span>
             </div>
           </motion.div>
