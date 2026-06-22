@@ -10,13 +10,13 @@ const SLIDES = [
   { component: lazy(() => import('./slides/02_Introduccion')),   title: '¿Por qué Criptografía?',     presenter: 'Rodrigo' },
   // ── Simétrica ───────────────────────────────────────────────────
   { component: lazy(() => import('./slides/03_Simetrica')),      title: 'AES, DES y 3DES',            presenter: 'Rodrigo' },
+  { component: lazy(() => import('./slides/AsimetricaIntro')),   title: 'El Problema de la Clave',    presenter: 'Rodrigo'  },
   { component: lazy(() => import('./slides/DES_Detalle')),       title: 'DES — Por qué Falló',        presenter: 'Rodrigo' },
   { component: lazy(() => import('./slides/AES_Detalle')),       title: 'AES — Estructura Interna',   presenter: 'Rodrigo' },
   { component: lazy(() => import('./slides/04_Modos')),          title: 'Modos de Operación',         presenter: 'Rodrigo' },
   // ── Quiz ────────────────────────────────────────────────────────
   { component: lazy(() => import('./slides/05_Quiz')),           title: 'Quiz Interactivo',           presenter: 'Ambos'   },
   // ── Asimétrica ──────────────────────────────────────────────────
-  { component: lazy(() => import('./slides/AsimetricaIntro')),   title: 'El Problema de la Clave',    presenter: 'Carlos'  },
   { component: lazy(() => import('./slides/06_Asimetrica')),     title: 'RSA y Curvas Elípticas',     presenter: 'Carlos'  },
   { component: lazy(() => import('./slides/ECC_Detalle')),       title: 'ECC — Curvas Elípticas',     presenter: 'Carlos'  },
   { component: lazy(() => import('./slides/Firmas')),            title: 'Firmas Digitales',           presenter: 'Carlos'  },
@@ -35,9 +35,20 @@ const PRESENTER_COLORS: Record<string, string> = {
 }
 
 export default function App() {
-  const [current, setCurrent]   = useState(0)
+  const [current, setCurrent] = useState(() => {
+    const saved = localStorage.getItem('currentSlide')
+    if (saved !== null) {
+      const idx = parseInt(saved, 10)
+      if (!isNaN(idx) && idx >= 0 && idx < SLIDES.length) return idx
+    }
+    return 0
+  })
   const [direction, setDirection] = useState(1)
   const scale = useSlideScale()
+
+  useEffect(() => {
+    localStorage.setItem('currentSlide', current.toString())
+  }, [current])
 
   const navigate = useCallback((delta: number) => {
     setCurrent(prev => {
@@ -55,6 +66,9 @@ export default function App() {
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
+      const target = e.target as HTMLElement
+      if (target && ['INPUT', 'TEXTAREA'].includes(target.tagName)) return
+      
       if (['ArrowRight', 'ArrowDown', ' '].includes(e.key)) { e.preventDefault(); navigate(1) }
       if (['ArrowLeft', 'ArrowUp'].includes(e.key))         { e.preventDefault(); navigate(-1) }
     }
