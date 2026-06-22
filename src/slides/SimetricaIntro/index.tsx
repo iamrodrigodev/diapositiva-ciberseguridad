@@ -3,7 +3,7 @@ import { stagger, fadeUp } from '../../lib/motion'
 import SlideLayout from '../../components/SlideLayout'
 import Tag from '../../ui/Tag'
 import Title from '../../ui/Title'
-import { Key, LockKey, LockOpen, Lightning, WarningCircle } from '@phosphor-icons/react'
+import { Key, LockKey, LockOpen, Lightning, WarningCircle, HardDrives, Database, MonitorPlay, Globe } from '@phosphor-icons/react'
 
 export default function SimetricaIntro() {
   return (
@@ -98,19 +98,27 @@ export default function SimetricaIntro() {
 
             <div className="grid grid-cols-2 gap-3">
               <div className="bg-white/5 border border-white/10 rounded-xl p-3 flex items-center gap-3">
-                <div className="w-8 h-8 rounded-full bg-blue-500/20 flex items-center justify-center">💻</div>
+                <div className="w-8 h-8 rounded-full bg-blue-500/20 flex items-center justify-center text-blue-400">
+                  <HardDrives size={16} weight="duotone" />
+                </div>
                 <span className="text-[12px] font-bold text-white/70">Discos Duros (BitLocker)</span>
               </div>
               <div className="bg-white/5 border border-white/10 rounded-xl p-3 flex items-center gap-3">
-                <div className="w-8 h-8 rounded-full bg-blue-500/20 flex items-center justify-center">🗄️</div>
+                <div className="w-8 h-8 rounded-full bg-blue-500/20 flex items-center justify-center text-blue-400">
+                  <Database size={16} weight="duotone" />
+                </div>
                 <span className="text-[12px] font-bold text-white/70">Bases de Datos</span>
               </div>
               <div className="bg-white/5 border border-white/10 rounded-xl p-3 flex items-center gap-3">
-                <div className="w-8 h-8 rounded-full bg-blue-500/20 flex items-center justify-center">📺</div>
+                <div className="w-8 h-8 rounded-full bg-blue-500/20 flex items-center justify-center text-blue-400">
+                  <MonitorPlay size={16} weight="duotone" />
+                </div>
                 <span className="text-[12px] font-bold text-white/70">Streaming (Netflix)</span>
               </div>
               <div className="bg-white/5 border border-white/10 rounded-xl p-3 flex items-center gap-3">
-                <div className="w-8 h-8 rounded-full bg-blue-500/20 flex items-center justify-center">🌐</div>
+                <div className="w-8 h-8 rounded-full bg-blue-500/20 flex items-center justify-center text-blue-400">
+                  <Globe size={16} weight="duotone" />
+                </div>
                 <span className="text-[12px] font-bold text-white/70">Carga de HTTPS</span>
               </div>
             </div>
