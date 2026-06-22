@@ -7,10 +7,30 @@ import Title from '../../ui/Title'
 import { ArrowsClockwise, ArrowsLeftRight, Shuffle, Plus, ShieldCheck, GridFour, Intersect } from '@phosphor-icons/react'
 
 const ROUNDS = [
-  { label: 'SubBytes',    color: '#60a5fa', Icon: ArrowsClockwise, desc: 'Cada byte se sustituye con un valor de la S-box. Aporta la crucial confusión no lineal.', visual: 'sub'   },
-  { label: 'ShiftRows',   color: '#a78bfa', Icon: ArrowsLeftRight, desc: 'Las filas de la matriz se desplazan cíclicamente. Rompe la simetría de las columnas.', visual: 'shift' },
-  { label: 'MixColumns',  color: '#fbbf24', Icon: Shuffle,         desc: 'Multiplicación de matrices. Aporta difusión: un byte modificado afecta a toda la columna.', visual: 'mix'   },
-  { label: 'AddRoundKey', color: '#34d399', Icon: Plus,            desc: 'Operación XOR con la subclave. El único paso donde la clave secreta interactúa con los datos.', visual: 'add'   },
+  { 
+    label: 'SubBytes', color: '#60a5fa', Icon: ArrowsClockwise, 
+    desc: 'Cada byte se sustituye con un valor de la S-box. Aporta la crucial confusión no lineal.', 
+    visual: 'sub',
+    visualDesc: 'Fíjate cómo cada celda cambia su valor original a un misterioso "Sx". Cada bloque ha sido sustituido en la tabla de mezcla (S-Box).'
+  },
+  { 
+    label: 'ShiftRows', color: '#a78bfa', Icon: ArrowsLeftRight, 
+    desc: 'Las filas de la matriz se desplazan cíclicamente. Rompe la simetría de las columnas.', 
+    visual: 'shift',
+    visualDesc: 'Mira los colores: La 1ª fila no se mueve. La 2ª se desplaza 1 espacio a la izquierda. La 3ª se desplaza 2 espacios. La 4ª se desplaza 3 espacios.'
+  },
+  { 
+    label: 'MixColumns', color: '#fbbf24', Icon: Shuffle, 
+    desc: 'Multiplicación de matrices. Aporta difusión: un byte modificado afecta a toda la columna.', 
+    visual: 'mix',
+    visualDesc: 'Los 4 bloques de cada columna se han mezclado matemáticamente entre sí. Ahora, un cambio minúsculo en un byte afectaría a toda la columna entera.'
+  },
+  { 
+    label: 'AddRoundKey', color: '#34d399', Icon: Plus, 
+    desc: 'Operación XOR con la subclave. El único paso donde la clave secreta interactúa con los datos.', 
+    visual: 'add',
+    visualDesc: 'Los valores ahora incluyen el símbolo "⊕". Esto significa que a cada celda se le inyectó la "Clave de Ronda" mediante una operación lógica (XOR).'
+  },
 ]
 
 // Solid colors per column to clearly track movement
@@ -111,6 +131,12 @@ export default function AES_Detalle() {
                 </div>
               ))}
             </div>
+            
+            <div className="mt-1 pt-3 border-t border-emerald-500/20">
+              <p className="text-[12px] text-white/70 leading-relaxed">
+                <strong className="text-emerald-400">¿Qué son las rondas?</strong> Es el número de veces que se repiten las 4 mutaciones (SubBytes, ShiftRows, MixColumns, AddRoundKey) sobre los datos. A mayor tamaño de clave, más rondas para garantizar la seguridad.
+              </p>
+            </div>
           </motion.div>
 
           {/* State matrix explanation */}
@@ -200,6 +226,13 @@ export default function AES_Detalle() {
                 <p className="font-mono text-[11px] uppercase tracking-widest font-bold transition-colors duration-500" style={{ color: ROUNDS[activeOp]?.color }}>Después</p>
                 <StateGrid op={ROUNDS[activeOp]?.visual ?? 'sub'} activeColor={ROUNDS[activeOp]?.color} />
               </div>
+            </div>
+
+            <div className="mt-6 pt-4 border-t border-white/10 text-center">
+              <p className="text-[13px] font-medium leading-relaxed transition-colors duration-500" style={{ color: ROUNDS[activeOp]?.color }}>
+                <strong className="font-bold mr-2">💡 ¿Qué acaba de pasar?</strong>
+                {ROUNDS[activeOp]?.visualDesc}
+              </p>
             </div>
           </motion.div>
         </motion.div>
