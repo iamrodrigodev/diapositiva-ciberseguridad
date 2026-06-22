@@ -36,7 +36,7 @@ export default function DiffieHellman() {
   const bobPub = modExp(G, bobPriv, P)
 
   const aliceSecret = modExp(bobPub, alicePriv, P)
-  const bobSecret = modExp(alicePub, bobPriv, P) // Will be identical mathematically
+  // bobSecret would be modExp(alicePub, bobPriv, P) but it's identical mathematically, so we omit to avoid unused var warning
 
   return (
     <SlideLayout>
