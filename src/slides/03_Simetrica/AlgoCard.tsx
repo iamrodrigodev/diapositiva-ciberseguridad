@@ -5,7 +5,7 @@ import type { AlgoSpec } from './data'
 export default function AlgoCard({ algo }: { algo: AlgoSpec }) {
   const { label, bits, rounds, color, note, detail, statusLabel } = algo
   return (
-    <motion.div variants={fadeUp} className="flex-1 rounded-2xl p-4 flex flex-col gap-2 overflow-hidden"
+    <motion.div variants={fadeUp} className="flex-1 rounded-2xl p-3 flex flex-col gap-1.5 overflow-hidden"
       style={{ background: 'rgba(255,255,255,0.03)', border: `1px solid ${color}28` }}>
 
       <div className="flex items-center gap-2 flex-wrap">
@@ -19,7 +19,7 @@ export default function AlgoCard({ algo }: { algo: AlgoSpec }) {
 
       <p className="text-xs text-white/70 leading-relaxed">{note}</p>
 
-      <div className="rounded-xl px-3 py-2" style={{ background: `${color}08`, border: `1px solid ${color}18` }}>
+      <div className="rounded-xl px-3 py-1.5" style={{ background: `${color}08`, border: `1px solid ${color}18` }}>
         <p className="text-xs leading-relaxed" style={{ color: `${color}cc` }}>{detail}</p>
       </div>
     </motion.div>
