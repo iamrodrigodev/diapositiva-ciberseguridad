@@ -18,22 +18,27 @@ export default function Modos() {
       <Title>ECB, CBC y GCM</Title>
 
       <div className="flex gap-5 flex-1 overflow-hidden">
-        {/* Pixel art demo */}
-        <motion.div variants={fadeUp} className="flex flex-col items-center justify-start gap-5 w-[34%] pt-2">
-          <p className="font-mono text-[10px] text-white/30 tracking-widest uppercase self-start">
+        <motion.div variants={fadeUp} className="flex flex-col items-center gap-4 w-[32%] pt-1">
+          <p className="text-xs font-mono text-white/35 tracking-widest uppercase self-start">
             Imagen cifrada con {mode}
           </p>
           <PixelGrid mode={mode} />
-          <p className="font-mono text-[11px]" style={{ color: mode === 'ECB' ? '#f87171' : '#34d399' }}>
-            {mode === 'ECB' ? '⚠ Patrón visible' : '✓ Patrón oculto'}
+          <p className="text-sm font-bold" style={{ color: mode === 'ECB' ? '#f87171' : '#34d399' }}>
+            {mode === 'ECB' ? '⚠ Patrón visible — inseguro' : '✓ Patrón oculto — seguro'}
           </p>
-          <div>
-            <p className="font-mono text-[9px] text-white/20 text-center mb-1.5">Original</p>
+          <div className="flex flex-col items-center gap-1">
+            <p className="text-xs font-mono text-white/25">Original (sin cifrar)</p>
             <PixelGrid mode="ECB" small />
           </div>
+          <p className="text-xs text-white/30 text-center leading-relaxed">
+            {mode === 'ECB'
+              ? 'ECB cifra cada bloque igual → bloques idénticos dan el mismo resultado. El patrón queda visible.'
+              : mode === 'CBC'
+                ? 'CBC encadena bloques con XOR + IV → cada bloque depende del anterior. Patrón destruido.'
+                : 'GCM usa contador + autenticación → cifra y detecta manipulaciones. El más seguro.'}
+          </p>
         </motion.div>
 
-        {/* Info */}
         <div className="flex flex-col flex-1 gap-3">
           <motion.div variants={fadeUp}>
             <ModeSelector active={mode} onChange={setMode} />
