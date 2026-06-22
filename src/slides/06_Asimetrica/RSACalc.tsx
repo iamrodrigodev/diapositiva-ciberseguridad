@@ -29,14 +29,14 @@ export default function RSACalc() {
   return (
     <motion.div variants={fadeUp} className="flex flex-col gap-3">
       <div className="flex items-center gap-2 mb-1">
-        <Calculator size={13} className="text-violet-400" />
-        <span className="font-mono text-[10px] text-violet-400 tracking-widest uppercase">Simulador RSA interactivo</span>
+        <Calculator size={15} className="text-violet-400" />
+        <span className="text-sm font-bold text-violet-400">Simulador RSA interactivo</span>
       </div>
 
       <div className="grid grid-cols-2 gap-2">
         {([['p (primo)', pNum, [3,5,7,11,13], handleP], ['q (primo)', qNum, [7,11,13,17,19], handleQ]] as const).map(([lbl, val, opts, setter]) => (
           <div key={lbl}>
-            <label className="font-mono text-[10px] text-white/35 block mb-1">{lbl}</label>
+            <label className="text-xs font-mono text-white/40 block mb-1">{lbl}</label>
             <select value={val} onChange={e => setter(+e.target.value)}
               className="w-full rounded-lg px-3 py-2 font-mono text-sm text-white outline-none"
               style={{ background: 'rgba(167,139,250,0.08)', border: '1px solid rgba(167,139,250,0.2)' }}>
@@ -54,7 +54,7 @@ export default function RSACalc() {
       </div>
 
       <div>
-        <label className="font-mono text-[10px] text-white/35 block mb-1">Mensaje m (1 … {String(n - 1n)})</label>
+        <label className="text-xs font-mono text-white/40 block mb-1">Mensaje m (1 … {String(n - 1n)})</label>
         <input type="number" value={msgNum} min={1} max={Number(n - 1n)}
           onChange={e => handleMsg(Math.max(1, Math.min(+e.target.value, Number(n - 1n))))}
           className="w-full rounded-lg px-3 py-2 font-mono text-sm text-white outline-none"
@@ -74,7 +74,7 @@ export default function RSACalc() {
             {step === 'dec' && (
               <div className="flex items-center gap-2">
                 <CodeLine label="m' = cᵈ mod n" value={`= ${plain}`} color="#a78bfa" />
-                {plain === m && <span className="font-mono text-[10px] text-emerald-400">✓ igual!</span>}
+                {plain === m && <span className="text-sm text-emerald-400 font-bold">✓ igual!</span>}
               </div>
             )}
           </motion.div>
