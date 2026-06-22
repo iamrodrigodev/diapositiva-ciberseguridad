@@ -20,7 +20,13 @@ body {
   font-family: 'Inter', sans-serif;
 }
 
-/* Terminal grid background */
+button {
+  cursor: pointer;
+}
+button:disabled {
+  cursor: default;
+}
+
 .bg-grid {
   background-image:
     linear-gradient(rgba(16, 185, 129, 0.04) 1px, transparent 1px),
@@ -28,7 +34,6 @@ body {
   background-size: 48px 48px;
 }
 
-/* Scanlines overlay */
 .scanlines::after {
   content: '';
   position: absolute;
@@ -44,7 +49,6 @@ body {
   z-index: 2;
 }
 
-/* Glow effects */
 .glow-green {
   text-shadow: 0 0 20px rgba(52, 211, 153, 0.6), 0 0 60px rgba(52, 211, 153, 0.2);
 }
@@ -52,7 +56,6 @@ body {
   text-shadow: 0 0 20px rgba(96, 165, 250, 0.6), 0 0 60px rgba(96, 165, 250, 0.2);
 }
 
-/* Card glow borders */
 .card-glow-green {
   box-shadow: 0 0 0 1px rgba(52, 211, 153, 0.2), 0 4px 32px rgba(52, 211, 153, 0.06);
 }
@@ -63,13 +66,11 @@ body {
   box-shadow: 0 0 0 1px rgba(167, 139, 250, 0.2), 0 4px 32px rgba(167, 139, 250, 0.06);
 }
 
-/* Custom scrollbar */
 ::-webkit-scrollbar { width: 4px; }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 2px; }
 ::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.2); }
 
-/* Blinking cursor */
 @keyframes blink {
   0%, 100% { opacity: 1; }
   50% { opacity: 0; }
@@ -80,7 +81,6 @@ body {
   color: #34d399;
 }
 
-/* Hex rain animation */
 @keyframes fall {
   0% { transform: translateY(-100%); opacity: 0; }
   10% { opacity: 1; }
@@ -88,11 +88,11 @@ body {
   100% { transform: translateY(100vh); opacity: 0; }
 }
 
-/* Pulse ring */
 @keyframes pulse-ring {
   0% { transform: scale(0.8); opacity: 1; }
   100% { transform: scale(2); opacity: 0; }
 }
+
 .pulse-ring {
   animation: pulse-ring 1.5s ease-out infinite;
 }
