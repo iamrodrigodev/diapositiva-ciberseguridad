@@ -20,45 +20,58 @@ export default function SimuladorDH() {
       <Tag>Simulador DH paso a paso · Carlos</Tag>
       <Title>Protocolo Diffie-Hellman</Title>
 
-      <div className="flex gap-5 flex-1 overflow-hidden">
-        <motion.div variants={fadeUp} className="w-[28%] flex flex-col gap-4">
-          <div className="rounded-2xl p-5" style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.08)' }}>
-            <p className="text-xs font-mono text-white/35 uppercase tracking-widest mb-4">Secretos privados</p>
-            {([['a — Alice', a, setA], ['b — Bob', b, setB]] as const).map(([lbl, val, setter]) => (
-              <div key={lbl} className="mb-4">
-                <div className="flex justify-between mb-2">
-                  <label className="text-sm font-mono text-white/55">{lbl}</label>
-                  <span className="text-sm font-bold font-mono text-white/70">{val}</span>
+      <div className="flex gap-6 flex-1 overflow-hidden mt-2">
+        {/* Left: Controls */}
+        <motion.div variants={fadeUp} className="w-[30%] flex flex-col gap-4">
+          <div className="rounded-3xl p-6 relative overflow-hidden" style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.08)' }}>
+            <p className="text-[11px] font-mono text-white/50 uppercase tracking-widest mb-4 font-bold border-b border-white/10 pb-2">Claves Privadas Iniciales</p>
+            
+            <div className="space-y-4">
+              {([['Alice (a)', a, setA, '#60a5fa'], ['Bob (b)', b, setB, '#a78bfa']] as const).map(([lbl, val, setter, color]) => (
+                <div key={lbl} className="bg-white/5 p-4 rounded-2xl border transition-all hover:scale-[1.02]" style={{ borderColor: `${color}30` }}>
+                  <div className="flex justify-between items-center mb-2">
+                    <label className="text-[12px] font-mono font-bold" style={{ color }}>{lbl}</label>
+                    <div className="flex items-center gap-1.5 bg-black/40 px-2 py-0.5 rounded-md border" style={{ borderColor: `${color}40` }}>
+                      <span className="text-[12px] font-mono font-bold" style={{ color }}>{val}</span>
+                    </div>
+                  </div>
+                  <input type="range" min="2" max="10" value={val}
+                    onChange={e => { setter(+e.target.value); setStepIdx(0) }}
+                    className="w-full h-1.5 rounded-full cursor-pointer outline-none"
+                    style={{ accentColor: color }} />
                 </div>
-                <input type="range" min="2" max="10" value={val}
-                  onChange={e => { setter(+e.target.value); setStepIdx(0) }}
-                  className="w-full h-2 rounded-full cursor-pointer"
-                  style={{ accentColor: '#818cf8' }} />
-              </div>
-            ))}
+              ))}
+            </div>
+            
+            <p className="text-[11px] text-white/40 mt-5 leading-relaxed">
+              Mueve los valores para reiniciar la simulación con nuevas claves privadas.
+            </p>
           </div>
 
-          <div className="space-y-2">
-            <Button variant="primary" className="w-full py-3 text-sm"
+          <div className="rounded-3xl p-5 mt-auto flex flex-col gap-3" style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.08)' }}>
+            <Button variant="primary" className="w-full py-3 text-sm font-bold shadow-lg"
               onClick={() => setStepIdx(i => Math.min(i + 1, SEQUENCE.length))}
               disabled={stepIdx >= SEQUENCE.length}>
-              ▶ Siguiente paso
+              ▶ Siguiente Paso
             </Button>
-            <Button variant="ghost" className="w-full py-3 text-sm"
-              onClick={() => setStepIdx(SEQUENCE.length)}>
-              ⏭ Ver todo
-            </Button>
-            <Button variant="secondary" className="w-full py-3 text-sm"
-              onClick={() => setStepIdx(0)}>
-              ↺ Reiniciar
-            </Button>
-          </div>
-
-          <div className="text-sm font-mono text-white/30 text-center">
-            Paso {Math.min(stepIdx, SEQUENCE.length)} de {SEQUENCE.length}
+            <div className="flex gap-2">
+              <Button variant="ghost" className="flex-1 py-2.5 text-xs bg-white/5 hover:bg-white/10"
+                onClick={() => setStepIdx(SEQUENCE.length)}>
+                ⏭ Ver Todo
+              </Button>
+              <Button variant="secondary" className="flex-1 py-2.5 text-xs"
+                onClick={() => setStepIdx(0)}>
+                ↺ Reiniciar
+              </Button>
+            </div>
+            
+            <div className="text-[11px] font-mono text-white/40 text-center mt-1 uppercase tracking-wider font-bold">
+              Paso {Math.min(stepIdx, SEQUENCE.length)} de {SEQUENCE.length}
+            </div>
           </div>
         </motion.div>
 
+        {/* Right: Stepper */}
         <motion.div variants={fadeUp} className="flex-1 overflow-y-auto pr-1">
           <DHStepper a={a} b={b} steps={steps} />
         </motion.div>
