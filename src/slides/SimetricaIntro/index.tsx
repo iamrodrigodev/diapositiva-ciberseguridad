@@ -3,7 +3,7 @@ import { stagger, fadeUp } from '../../lib/motion'
 import SlideLayout from '../../components/SlideLayout'
 import Tag from '../../ui/Tag'
 import Title from '../../ui/Title'
-import { Key, LockKey, LockOpen, Lightning, Infinity as InfinityIcon, WarningCircle } from '@phosphor-icons/react'
+import { Key, LockKey, LockOpen, Lightning, WarningCircle } from '@phosphor-icons/react'
 
 export default function SimetricaIntro() {
   return (
