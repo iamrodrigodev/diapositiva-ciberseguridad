@@ -1,8 +1,8 @@
 import { motion } from 'framer-motion'
 import { stagger, fadeUp } from '../../lib/motion'
 const PRESENTERS = [
-  { name: 'Rodrigo Infanzon', color: '#34d399', slides: 'Historia · Simétrica · Quiz' },
-  { name: 'Carlos Aguilar',   color: '#818cf8', slides: 'Asimétrica · ECC · DH · Firmas' },
+  { name: 'Rodrigo Infanzon', color: '#34d399', slides: 'Historia · Conceptos · Simétrica · Modos' },
+  { name: 'Carlos Aguilar',   color: '#818cf8', slides: 'Asimétrica · Firmas · Diffie-Hellman' },
 ]
 
 export default function Portada() {
