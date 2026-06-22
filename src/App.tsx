@@ -68,9 +68,9 @@ export default function App() {
   const progress = ((current + 1) / SLIDES.length) * 100
 
   return (
-    <div className="h-dvh w-screen bg-[#0a0a0f] overflow-hidden flex flex-col select-none">
+    <div className="h-dvh w-screen overflow-hidden flex flex-col select-none bg-grid" style={{ backgroundColor: '#0a0a0f' }}>
       {/* Progress bar */}
-      <div className="relative h-[2px] bg-white/5 shrink-0">
+      <div className="relative h-0.5 bg-white/5 shrink-0">
         <motion.div
           className="absolute inset-y-0 left-0"
           style={{ background: 'linear-gradient(90deg, #10b981, #3b82f6)' }}
@@ -120,14 +120,29 @@ export default function App() {
       </div>
 
       {/* Bottom navigation */}
-      <div className="h-10 shrink-0 flex items-center justify-between px-6 border-t border-white/[0.06] bg-black/30">
+      <div
+        className="h-12 shrink-0 flex items-center justify-between px-6"
+        style={{
+          background: 'rgba(8,8,18,0.92)',
+          borderTop: '1px solid rgba(255,255,255,0.09)',
+          backdropFilter: 'blur(12px)',
+        }}
+      >
         {/* Left: counter + presenter */}
-        <div className="flex items-center gap-3 min-w-[100px]">
-          <span className="font-mono text-[11px] text-white/45">
-            {String(current + 1).padStart(2, '0')}/{String(SLIDES.length).padStart(2, '0')}
+        <div className="flex items-center gap-2.5 min-w-32.5">
+          <span
+            className="font-mono text-xs font-semibold tabular-nums"
+            style={{ color: 'rgba(255,255,255,0.55)' }}
+          >
+            {String(current + 1).padStart(2, '0')}
+            <span style={{ color: 'rgba(255,255,255,0.2)' }}>/</span>
+            {String(SLIDES.length).padStart(2, '0')}
           </span>
-          <span className="text-white/30">·</span>
-          <span className="font-mono text-[11px] font-medium" style={{ color }}>
+          <span style={{ width: 1, height: 14, background: 'rgba(255,255,255,0.12)', display: 'inline-block' }} />
+          <span
+            className="font-mono text-xs font-semibold tracking-wide"
+            style={{ color }}
+          >
             {slide.presenter}
           </span>
         </div>
@@ -138,29 +153,54 @@ export default function App() {
             <button
               key={i}
               onClick={() => goTo(i)}
-              className="rounded-full transition-all duration-300 hover:opacity-80"
+              aria-label={`Ir al slide ${i + 1}`}
+              className="cursor-pointer transition-all duration-300"
               style={{
-                width:      i === current ? '14px' : '6px',
-                height:     '6px',
-                background: i === current ? '#34d399' : 'rgba(255,255,255,0.18)',
+                width:      i === current ? '20px' : '7px',
+                height:     '7px',
+                borderRadius: '999px',
+                background: i === current ? color : 'rgba(255,255,255,0.2)',
+                boxShadow: i === current ? `0 0 8px ${color}80` : 'none',
               }}
             />
           ))}
         </div>
 
         {/* Right: arrow buttons */}
-        <div className="flex items-center gap-1 min-w-[100px] justify-end">
+        <div className="flex items-center gap-2 min-w-32.5 justify-end">
           <button
             onClick={() => navigate(-1)}
             disabled={current === 0}
-            className="px-3 py-1 font-mono text-xs text-white/45 hover:text-emerald-400 disabled:opacity-25 rounded hover:bg-white/5 transition-all"
+            aria-label="Slide anterior"
+            className="cursor-pointer disabled:cursor-default transition-all duration-200 flex items-center justify-center rounded-lg"
+            style={{
+              width: 32, height: 32,
+              background: current === 0 ? 'transparent' : 'rgba(255,255,255,0.05)',
+              border: '1px solid rgba(255,255,255,0.1)',
+              color: current === 0 ? 'rgba(255,255,255,0.2)' : 'rgba(255,255,255,0.65)',
+              fontSize: 15,
+              opacity: current === 0 ? 0.4 : 1,
+            }}
+            onMouseEnter={e => { if (current !== 0) (e.currentTarget as HTMLButtonElement).style.background = 'rgba(255,255,255,0.1)' }}
+            onMouseLeave={e => { if (current !== 0) (e.currentTarget as HTMLButtonElement).style.background = 'rgba(255,255,255,0.05)' }}
           >
             ←
           </button>
           <button
             onClick={() => navigate(1)}
             disabled={current === SLIDES.length - 1}
-            className="px-3 py-1 font-mono text-xs text-white/45 hover:text-emerald-400 disabled:opacity-25 rounded hover:bg-white/5 transition-all"
+            aria-label="Siguiente slide"
+            className="cursor-pointer disabled:cursor-default transition-all duration-200 flex items-center justify-center rounded-lg"
+            style={{
+              width: 32, height: 32,
+              background: current === SLIDES.length - 1 ? 'transparent' : `${color}18`,
+              border: `1px solid ${current === SLIDES.length - 1 ? 'rgba(255,255,255,0.1)' : color + '40'}`,
+              color: current === SLIDES.length - 1 ? 'rgba(255,255,255,0.2)' : color,
+              fontSize: 15,
+              opacity: current === SLIDES.length - 1 ? 0.4 : 1,
+            }}
+            onMouseEnter={e => { if (current !== SLIDES.length - 1) (e.currentTarget as HTMLButtonElement).style.background = `${color}30` }}
+            onMouseLeave={e => { if (current !== SLIDES.length - 1) (e.currentTarget as HTMLButtonElement).style.background = `${color}18` }}
           >
             →
           </button>
