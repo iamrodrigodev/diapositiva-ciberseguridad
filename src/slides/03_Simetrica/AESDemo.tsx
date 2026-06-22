@@ -3,10 +3,11 @@ import { RefreshCw } from 'lucide-react'
 import { genAESKey, aesEncrypt, freshIV } from '../../lib/crypto/aes'
 
 export default function AESDemo() {
-  const [input,   setInput]   = useState('Hola Mundo!')
-  const [output,  setOutput]  = useState('')
-  const [keyHex,  setKeyHex]  = useState('')
-  const [loading, setLoading] = useState(false)
+  const [input,    setInput]    = useState('Hola Mundo!')
+  const [output,   setOutput]   = useState('')
+  const [keyHex,   setKeyHex]   = useState('')
+  const [loading,  setLoading]  = useState(false)
+  const [keyReady, setKeyReady] = useState(false)
   const keyRef = useRef<CryptoKey | null>(null)
   const ivRef  = useRef<Uint8Array>(new Uint8Array(16))
 
@@ -22,22 +23,33 @@ export default function AESDemo() {
     keyRef.current = key
     ivRef.current  = freshIV()
     setKeyHex(hex)
+    setKeyReady(k => !k)
   }, [])
 
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    newKey()
-  }, [newKey])
+    let cancelled = false
+    async function init() {
+      const { key, keyHex: hex } = await genAESKey()
+      if (cancelled) return
+      keyRef.current = key
+      ivRef.current = freshIV()
+      setKeyHex(hex)
+      setKeyReady(k => !k)
+    }
+    init()
+    return () => { cancelled = true }
+  }, [])
 
+  // Re-runs whenever input changes OR after a new key is generated
   useEffect(() => {
     encrypt(input)
-  }, [input, encrypt])
+  }, [input, encrypt, keyReady])
 
   return (
     <div className="flex-1 flex flex-col rounded-2xl p-5 gap-3"
       style={{ background: 'rgba(52,211,153,0.04)', border: '1px solid rgba(52,211,153,0.18)' }}>
       <div className="flex items-center justify-between">
-        <span className="text-xs font-mono text-emerald-400 tracking-widest uppercase">Demo AES-256-CBC en vivo</span>
+        <span className="text-xs font-mono text-emerald-400 tracking-widest uppercase">Demo AES-256 en vivo</span>
         <button onClick={newKey}
           className="flex items-center gap-1 text-xs text-emerald-400/60 hover:text-emerald-400 font-mono transition-colors">
           <RefreshCw size={11} /> nueva clave

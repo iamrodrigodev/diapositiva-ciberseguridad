@@ -7,7 +7,7 @@ interface Props { children: ReactNode; className?: string; noGrid?: boolean }
 export default function SlideLayout({ children, className = '', noGrid }: Props) {
   return (
     <motion.div
-      className={`h-full w-full flex flex-col px-12 py-8 relative overflow-hidden ${className}`}
+      className={`h-full w-full flex flex-col px-12 py-5 relative overflow-hidden ${className}`}
       variants={stagger}
       initial="hidden"
       animate="show"

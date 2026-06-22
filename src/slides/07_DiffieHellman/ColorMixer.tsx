@@ -11,7 +11,7 @@ function Swatch({ hue, label, sub }: SwatchProps) {
         className="w-14 h-14 rounded-2xl"
         style={{ boxShadow: `0 0 20px hsl(${hue},72%,38%)55` }} />
       <span className="text-xs font-mono text-white/60">{label}</span>
-      {sub && <span className="text-xs font-mono text-white/30">{sub}</span>}
+      {sub && <span className="text-xs font-mono text-white/50">{sub}</span>}
     </div>
   )
 }
@@ -25,7 +25,7 @@ export default function ColorMixer({ aliceHue, bobHue, onAlice, onBob }: Props) 
 
   return (
     <div className="flex flex-col gap-5">
-      <p className="text-xs font-mono text-white/30 tracking-widest uppercase">Analogía visual — mezcla de colores</p>
+      <p className="text-xs font-mono text-white/50 tracking-widest uppercase">Analogía visual — mezcla de colores</p>
 
       <div className="grid grid-cols-3 gap-3 items-end">
         <Swatch hue={aliceHue}   label="Alice" sub="secreto privado" />
@@ -40,12 +40,12 @@ export default function ColorMixer({ aliceHue, bobHue, onAlice, onBob }: Props) 
 
       <div className="flex items-center justify-center gap-8">
         <div className="text-center">
-          <p className="text-xs font-mono text-white/30 mb-2">Alice: pub_B + secreto</p>
+          <p className="text-xs font-mono text-white/50 mb-2">Alice: pub_B + secreto</p>
           <Swatch hue={sharedHue} label="Secreto final" />
         </div>
         <span className="text-emerald-400 text-3xl font-bold">≡</span>
         <div className="text-center">
-          <p className="text-xs font-mono text-white/30 mb-2">Bob: pub_A + secreto</p>
+          <p className="text-xs font-mono text-white/50 mb-2">Bob: pub_A + secreto</p>
           <Swatch hue={sharedHue} label="Secreto final" />
         </div>
       </div>
@@ -54,8 +54,8 @@ export default function ColorMixer({ aliceHue, bobHue, onAlice, onBob }: Props) 
         {([['Secreto Alice', aliceHue, onAlice], ['Secreto Bob', bobHue, onBob]] as const).map(([lbl, val, setter]) => (
           <div key={lbl}>
             <div className="flex justify-between mb-1.5">
-              <label className="text-xs font-mono text-white/40">{lbl}</label>
-              <span className="text-xs font-mono text-white/40">{val}°</span>
+              <label className="text-xs font-mono text-white/60">{lbl}</label>
+              <span className="text-xs font-mono text-white/60">{val}°</span>
             </div>
             <input type="range" min="0" max="359" value={val}
               onChange={e => setter(+e.target.value)}

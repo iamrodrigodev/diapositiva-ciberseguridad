@@ -1,17 +1,31 @@
 import { useState, useEffect, useCallback, lazy, Suspense } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
+import { useSlideScale, SLIDE_BASE_W, SLIDE_BASE_H } from './lib/useSlideScale'
 
 const SLIDES = [
-  { component: lazy(() => import('./slides/01_Portada')),       title: 'Portada',              presenter: 'Ambos'   },
-  { component: lazy(() => import('./slides/02_Introduccion')),  title: 'Introducción',         presenter: 'Rodrigo' },
-  { component: lazy(() => import('./slides/03_Simetrica')),     title: 'Criptografía Simétrica', presenter: 'Rodrigo' },
-  { component: lazy(() => import('./slides/04_Modos')),         title: 'Modos de Operación',   presenter: 'Rodrigo' },
-  { component: lazy(() => import('./slides/05_Quiz')),          title: 'Quiz Interactivo',     presenter: 'Ambos'   },
-  { component: lazy(() => import('./slides/06_Asimetrica')),    title: 'Criptografía Asimétrica', presenter: 'Carlos' },
-  { component: lazy(() => import('./slides/07_DiffieHellman')), title: 'Diffie-Hellman',       presenter: 'Carlos'  },
-  { component: lazy(() => import('./slides/08_SimuladorDH')),   title: 'Simulador DH',         presenter: 'Ambos'   },
-  { component: lazy(() => import('./slides/09_Comparativa')),   title: 'Comparativa',          presenter: 'Ambos'   },
-  { component: lazy(() => import('./slides/10_Conclusion')),    title: 'Conclusión',           presenter: 'Ambos'   },
+  // ── Introducción ────────────────────────────────────────────────
+  { component: lazy(() => import('./slides/01_Portada')),        title: 'Portada',                    presenter: 'Ambos'   },
+  { component: lazy(() => import('./slides/Historia')),          title: 'Historia de la Criptografía', presenter: 'Rodrigo' },
+  { component: lazy(() => import('./slides/Conceptos')),         title: 'Conceptos Clave',            presenter: 'Rodrigo' },
+  { component: lazy(() => import('./slides/02_Introduccion')),   title: '¿Por qué Criptografía?',     presenter: 'Rodrigo' },
+  // ── Simétrica ───────────────────────────────────────────────────
+  { component: lazy(() => import('./slides/03_Simetrica')),      title: 'AES, DES y 3DES',            presenter: 'Rodrigo' },
+  { component: lazy(() => import('./slides/DES_Detalle')),       title: 'DES — Por qué Falló',        presenter: 'Rodrigo' },
+  { component: lazy(() => import('./slides/AES_Detalle')),       title: 'AES — Estructura Interna',   presenter: 'Rodrigo' },
+  { component: lazy(() => import('./slides/04_Modos')),          title: 'Modos de Operación',         presenter: 'Rodrigo' },
+  // ── Quiz ────────────────────────────────────────────────────────
+  { component: lazy(() => import('./slides/05_Quiz')),           title: 'Quiz Interactivo',           presenter: 'Ambos'   },
+  // ── Asimétrica ──────────────────────────────────────────────────
+  { component: lazy(() => import('./slides/AsimetricaIntro')),   title: 'El Problema de la Clave',    presenter: 'Carlos'  },
+  { component: lazy(() => import('./slides/06_Asimetrica')),     title: 'RSA y Curvas Elípticas',     presenter: 'Carlos'  },
+  { component: lazy(() => import('./slides/ECC_Detalle')),       title: 'ECC — Curvas Elípticas',     presenter: 'Carlos'  },
+  { component: lazy(() => import('./slides/Firmas')),            title: 'Firmas Digitales',           presenter: 'Carlos'  },
+  { component: lazy(() => import('./slides/07_DiffieHellman')),  title: 'Diffie-Hellman',             presenter: 'Carlos'  },
+  { component: lazy(() => import('./slides/08_SimuladorDH')),    title: 'Simulador DH',               presenter: 'Ambos'   },
+  // ── Cierre ──────────────────────────────────────────────────────
+  { component: lazy(() => import('./slides/Aplicaciones')),      title: 'Aplicaciones Reales',        presenter: 'Ambos'   },
+  { component: lazy(() => import('./slides/09_Comparativa')),    title: 'Comparativa',                presenter: 'Ambos'   },
+  { component: lazy(() => import('./slides/10_Conclusion')),     title: 'Conclusión',                 presenter: 'Ambos'   },
 ]
 
 const PRESENTER_COLORS: Record<string, string> = {
@@ -23,6 +37,7 @@ const PRESENTER_COLORS: Record<string, string> = {
 export default function App() {
   const [current, setCurrent]   = useState(0)
   const [direction, setDirection] = useState(1)
+  const scale = useSlideScale()
 
   const navigate = useCallback((delta: number) => {
     setCurrent(prev => {
@@ -73,21 +88,33 @@ export default function App() {
             variants={{
               enter:  (d: number) => ({ x: d > 0 ? '100%' : '-100%', opacity: 0 }),
               center: { x: 0, opacity: 1 },
-              exit:   (d: number) => ({ x: d > 0 ? '-15%' : '15%', opacity: 0, scale: 0.97 }),
+              exit:   (d: number) => ({ x: d > 0 ? '-15%' : '15%', opacity: 0 }),
             }}
             initial="enter"
             animate="center"
             exit="exit"
             transition={{ duration: 0.38, ease: [0.32, 0, 0.67, 0] }}
-            className="absolute inset-0"
+            className="absolute inset-0 flex items-center justify-center"
           >
-            <Suspense fallback={
-              <div className="h-full w-full flex items-center justify-center">
-                <span className="font-mono text-sm text-emerald-400 animate-pulse">inicializando...</span>
-              </div>
-            }>
-              <SlideComponent />
-            </Suspense>
+            {/* Fixed-size content box scaled to fit the available viewport */}
+            <div
+              style={{
+                width:           SLIDE_BASE_W,
+                height:          SLIDE_BASE_H,
+                transform:       `scale(${scale})`,
+                transformOrigin: 'center center',
+                flexShrink:      0,
+                overflow:        'hidden',
+              }}
+            >
+              <Suspense fallback={
+                <div className="h-full w-full flex items-center justify-center">
+                  <span className="font-mono text-sm text-emerald-400 animate-pulse">inicializando...</span>
+                </div>
+              }>
+                <SlideComponent />
+              </Suspense>
+            </div>
           </motion.div>
         </AnimatePresence>
       </div>
@@ -96,10 +123,10 @@ export default function App() {
       <div className="h-10 shrink-0 flex items-center justify-between px-6 border-t border-white/[0.06] bg-black/30">
         {/* Left: counter + presenter */}
         <div className="flex items-center gap-3 min-w-[100px]">
-          <span className="font-mono text-[11px] text-white/20">
+          <span className="font-mono text-[11px] text-white/45">
             {String(current + 1).padStart(2, '0')}/{String(SLIDES.length).padStart(2, '0')}
           </span>
-          <span className="text-white/10">·</span>
+          <span className="text-white/30">·</span>
           <span className="font-mono text-[11px] font-medium" style={{ color }}>
             {slide.presenter}
           </span>
@@ -126,14 +153,14 @@ export default function App() {
           <button
             onClick={() => navigate(-1)}
             disabled={current === 0}
-            className="px-3 py-1 font-mono text-xs text-white/25 hover:text-emerald-400 disabled:opacity-20 rounded hover:bg-white/5 transition-all"
+            className="px-3 py-1 font-mono text-xs text-white/45 hover:text-emerald-400 disabled:opacity-25 rounded hover:bg-white/5 transition-all"
           >
             ←
           </button>
           <button
             onClick={() => navigate(1)}
             disabled={current === SLIDES.length - 1}
-            className="px-3 py-1 font-mono text-xs text-white/25 hover:text-emerald-400 disabled:opacity-20 rounded hover:bg-white/5 transition-all"
+            className="px-3 py-1 font-mono text-xs text-white/45 hover:text-emerald-400 disabled:opacity-25 rounded hover:bg-white/5 transition-all"
           >
             →
           </button>

@@ -29,14 +29,18 @@ export default function BlockDemo({ mode }: Props) {
         <div>
           <p className="text-xs font-mono text-white/30 tracking-widest uppercase mb-3">Flujo de bloques</p>
           {mode === 'ECB' && (
-            <div className="flex gap-3 items-center flex-wrap font-mono text-sm">
-              {['M₁','M₂','M₃'].map((m, i) => (
-                <span key={i} className="flex items-center gap-2">
-                  <span className="px-3 py-1.5 rounded-lg font-bold" style={{ background: 'rgba(99,102,241,0.2)', color: '#818cf8', border: '1px solid rgba(99,102,241,0.35)' }}>{m}</span>
+            <div className="flex flex-col gap-2 font-mono text-sm">
+              {[
+                { plain: 'M₁',      cipher: 'C₁',      note: null },
+                { plain: 'M₂ = M₁', cipher: 'C₂ = C₁', note: '⚠ bloque igual → ciphertext igual' },
+                { plain: 'M₃',      cipher: 'C₃',      note: null },
+              ].map(({ plain, cipher, note }, i) => (
+                <div key={i} className="flex items-center gap-2 flex-wrap">
+                  <span className="px-3 py-1.5 rounded-lg font-bold" style={{ background: 'rgba(99,102,241,0.2)', color: '#818cf8', border: '1px solid rgba(99,102,241,0.35)' }}>{plain}</span>
                   <span className="text-white/25">→ E →</span>
-                  <span className="px-3 py-1.5 rounded-lg font-bold" style={{ background: 'rgba(245,158,11,0.18)', color: '#fbbf24', border: '1px solid rgba(245,158,11,0.3)' }}>C{i+1}</span>
-                  {i < 2 && <span className="text-red-400/60 text-xs ml-1">igual!</span>}
-                </span>
+                  <span className="px-3 py-1.5 rounded-lg font-bold" style={{ background: 'rgba(245,158,11,0.18)', color: '#fbbf24', border: '1px solid rgba(245,158,11,0.3)' }}>{cipher}</span>
+                  {note && <span className="text-red-400/70 text-xs">{note}</span>}
+                </div>
               ))}
             </div>
           )}

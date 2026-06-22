@@ -3,8 +3,8 @@ import { stagger, fadeUp } from '../../lib/motion'
 import ParticleField from './ParticleField'
 
 const PRESENTERS = [
-  { name: 'Rodrigo Infanzon', color: '#34d399', slides: 'Slides 02-05 — Simétrica & Quiz' },
-  { name: 'Carlos Aguilar',   color: '#818cf8', slides: 'Slides 06-08 — Asimétrica & DH' },
+  { name: 'Rodrigo Infanzon', color: '#34d399', slides: 'Historia · Simétrica · Quiz' },
+  { name: 'Carlos Aguilar',   color: '#818cf8', slides: 'Asimétrica · ECC · DH · Firmas' },
 ]
 
 export default function Portada() {
@@ -26,8 +26,8 @@ export default function Portada() {
           Criptografía<br />Simétrica y Asimétrica
         </motion.h1>
 
-        <motion.p variants={fadeUp} className="text-white/40 text-base max-w-lg leading-relaxed">
-          AES · DES · 3DES · ECB · CBC · GCM · RSA · ECC · Diffie-Hellman
+        <motion.p variants={fadeUp} className="text-white/40 text-base max-w-xl leading-relaxed">
+          Historia · Conceptos · AES · DES · Modos · RSA · ECC · Firmas Digitales · Diffie-Hellman · TLS
         </motion.p>
 
         <motion.div variants={fadeUp} className="flex gap-4 mt-2">

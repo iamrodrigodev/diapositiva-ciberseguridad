@@ -35,13 +35,13 @@ export default function Conclusion() {
           <TorusKnot />
           <div className="rounded-2xl px-5 py-4 text-center"
             style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.08)' }}>
-            <p className="text-sm text-white/55 leading-relaxed">
+            <p className="text-sm text-white/75 leading-relaxed">
               La criptografía es invisible pero está en cada conexión HTTPS, cada mensaje de WhatsApp, cada transacción bancaria.
             </p>
-            <p className="font-mono text-xs text-white/30 mt-3">
+            <p className="font-mono text-xs text-white/50 mt-3">
               Carlos Daniel Aguilar Chirinos · Rodrigo Emerson Infanzon Acosta
             </p>
-            <p className="font-mono text-xs text-white/20 mt-1">CIBERSEGURIDAD · 2026</p>
+            <p className="font-mono text-xs text-white/40 mt-1">CIBERSEGURIDAD · 2026</p>
           </div>
         </motion.div>
 

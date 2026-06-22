@@ -6,7 +6,7 @@ import PixelGrid from '../../components/PixelGrid'
 import Tag from '../../ui/Tag'
 import Title from '../../ui/Title'
 import ModeSelector from './ModeSelector'
-import BlockDemo from './BlockDemo'
+import BlockDiagram from './BlockDiagram'
 import type { Mode } from './data'
 
 export default function Modos() {
@@ -19,7 +19,7 @@ export default function Modos() {
 
       <div className="flex gap-5 flex-1 overflow-hidden">
         <motion.div variants={fadeUp} className="flex flex-col items-center gap-4 w-[32%] pt-1">
-          <p className="text-xs font-mono text-white/35 tracking-widest uppercase self-start">
+          <p className="text-xs font-mono text-white/55 tracking-widest uppercase self-start">
             Imagen cifrada con {mode}
           </p>
           <PixelGrid mode={mode} />
@@ -27,10 +27,10 @@ export default function Modos() {
             {mode === 'ECB' ? '⚠ Patrón visible — inseguro' : '✓ Patrón oculto — seguro'}
           </p>
           <div className="flex flex-col items-center gap-1">
-            <p className="text-xs font-mono text-white/25">Original (sin cifrar)</p>
+            <p className="text-xs font-mono text-white/45">Original (sin cifrar)</p>
             <PixelGrid mode="ECB" small />
           </div>
-          <p className="text-xs text-white/30 text-center leading-relaxed">
+          <p className="text-xs text-white/50 text-center leading-relaxed">
             {mode === 'ECB'
               ? 'ECB cifra cada bloque igual → bloques idénticos dan el mismo resultado. El patrón queda visible.'
               : mode === 'CBC'
@@ -43,7 +43,7 @@ export default function Modos() {
           <motion.div variants={fadeUp}>
             <ModeSelector active={mode} onChange={setMode} />
           </motion.div>
-          <BlockDemo mode={mode} />
+          <BlockDiagram mode={mode} />
         </div>
       </div>
     </SlideLayout>
