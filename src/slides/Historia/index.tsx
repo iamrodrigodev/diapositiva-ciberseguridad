@@ -23,7 +23,11 @@ export default function Historia() {
       <Tag>Fundamentos · Rodrigo</Tag>
       <Title>Historia de la Criptografía</Title>
 
-      <motion.div variants={stagger} className="flex-1 flex gap-8 overflow-hidden mt-2">
+      <p className="text-white/70 text-[15px] max-w-5xl mt-2 mb-2 leading-relaxed">
+        Desde la antigua Roma hasta la era cuántica, la humanidad ha tenido la necesidad vital de enviar secretos. Históricamente, la criptografía resuelve el problema de la <strong className="text-emerald-400">confidencialidad</strong> (ocultar el mensaje) y, más recientemente, la <strong className="text-blue-400">autenticidad e integridad</strong> en un mundo hiperconectado, en una carrera armamentística constante entre codificadores y criptoanalistas.
+      </p>
+
+      <motion.div variants={stagger} className="flex-1 flex gap-8 overflow-hidden mt-1">
         {/* Timeline */}
         <div className="flex-1 relative overflow-y-auto pr-4 custom-scrollbar">
           <div className="absolute left-6.5 top-4 bottom-4 w-px"
