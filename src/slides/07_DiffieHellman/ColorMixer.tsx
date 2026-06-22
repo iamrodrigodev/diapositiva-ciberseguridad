@@ -10,8 +10,8 @@ function Swatch({ hue, label, sub }: SwatchProps) {
       <motion.div layout animate={{ background: `hsl(${hue},72%,52%)` }} transition={{ duration: 0.4 }}
         className="w-14 h-14 rounded-2xl"
         style={{ boxShadow: `0 0 20px hsl(${hue},72%,38%)55` }} />
-      <span className="font-mono text-[10px] text-white/55">{label}</span>
-      {sub && <span className="font-mono text-[9px] text-white/25">{sub}</span>}
+      <span className="text-xs font-mono text-white/60">{label}</span>
+      {sub && <span className="text-xs font-mono text-white/30">{sub}</span>}
     </div>
   )
 }
@@ -25,40 +25,42 @@ export default function ColorMixer({ aliceHue, bobHue, onAlice, onBob }: Props) 
 
   return (
     <div className="flex flex-col gap-5">
-      <p className="font-mono text-[10px] text-white/30 tracking-widest uppercase">Analogía visual — mezcla de colores</p>
+      <p className="text-xs font-mono text-white/30 tracking-widest uppercase">Analogía visual — mezcla de colores</p>
 
       <div className="grid grid-cols-3 gap-3 items-end">
-        <Swatch hue={aliceHue}  label="Alice (secreto)"  sub="🔒 privado" />
-        <Swatch hue={PUBLIC_HUE} label="Color público"   sub="conocido" />
-        <Swatch hue={bobHue}    label="Bob (secreto)"    sub="🔒 privado" />
+        <Swatch hue={aliceHue}   label="Alice" sub="secreto privado" />
+        <Swatch hue={PUBLIC_HUE} label="Color público" sub="todos lo ven" />
+        <Swatch hue={bobHue}     label="Bob" sub="secreto privado" />
       </div>
+
       <div className="grid grid-cols-2 gap-3">
         <Swatch hue={alicePub} label="Alice publica" sub="pub_A" />
         <Swatch hue={bobPub}   label="Bob publica"   sub="pub_B" />
       </div>
-      <div className="flex items-center justify-center gap-6">
+
+      <div className="flex items-center justify-center gap-8">
         <div className="text-center">
-          <p className="font-mono text-[9px] text-white/25 mb-1.5">Alice: pub_B + secreto</p>
-          <Swatch hue={sharedHue} label="Secreto compartido" />
+          <p className="text-xs font-mono text-white/30 mb-2">Alice: pub_B + secreto</p>
+          <Swatch hue={sharedHue} label="Secreto final" />
         </div>
-        <span className="text-emerald-400 text-2xl font-bold">≡</span>
+        <span className="text-emerald-400 text-3xl font-bold">≡</span>
         <div className="text-center">
-          <p className="font-mono text-[9px] text-white/25 mb-1.5">Bob: pub_A + secreto</p>
-          <Swatch hue={sharedHue} label="Secreto compartido" />
+          <p className="text-xs font-mono text-white/30 mb-2">Bob: pub_A + secreto</p>
+          <Swatch hue={sharedHue} label="Secreto final" />
         </div>
       </div>
 
       <div className="space-y-3">
-        {[['Secreto Alice', aliceHue, onAlice], ['Secreto Bob', bobHue, onBob]].map(([lbl, val, setter]) => (
-          <div key={String(lbl)}>
-            <div className="flex justify-between mb-1">
-              <label className="font-mono text-[10px] text-white/35">{String(lbl)}</label>
-              <span className="font-mono text-[10px] text-white/35">{Number(val)}°</span>
+        {([['Secreto Alice', aliceHue, onAlice], ['Secreto Bob', bobHue, onBob]] as const).map(([lbl, val, setter]) => (
+          <div key={lbl}>
+            <div className="flex justify-between mb-1.5">
+              <label className="text-xs font-mono text-white/40">{lbl}</label>
+              <span className="text-xs font-mono text-white/40">{val}°</span>
             </div>
-            <input type="range" min="0" max="359" value={Number(val)}
-              onChange={e => (setter as (h: number) => void)(+e.target.value)}
-              className="w-full h-1.5 rounded-full cursor-pointer outline-none"
-              style={{ accentColor: `hsl(${Number(val)},72%,55%)` }} />
+            <input type="range" min="0" max="359" value={val}
+              onChange={e => setter(+e.target.value)}
+              className="w-full h-2 rounded-full cursor-pointer outline-none"
+              style={{ accentColor: `hsl(${val},72%,55%)` }} />
           </div>
         ))}
       </div>
